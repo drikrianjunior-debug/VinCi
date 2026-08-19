@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>VinCi | Contacts</title>
+    <title>VinCi | Accueil</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="images/3-removebg-preview.png" sizes="any">
@@ -106,53 +106,26 @@
       <div class="container-fluid px-0">
         <div class="row no-gutters block-9">
           <div class="col-md-6 order-md-last d-flex">
-            
-<form action="https://formsubmit.co/988721fb2f5b13188581b1f478428cf5" method="POST" class="bg-light p-5 contact-form text-center hidden" id="contactForm" style="padding-bottom: 40px;">
-
-    <!-- CONFIGURATION FORMSUBMIT -->
-    <input type="hidden" name="_subject" id="formSubject" value="Prise de contact directe">
-    <input type="hidden" name="_captcha" value="false">
-    
-    <!-- PIÈGE HONEYPOT (Invisible pour les utilisateurs, piège les bots) -->
-    <input type="text" name="_honey" style="display:none !important;" tabindex="-1" autocomplete="off">
-
-    <!-- ORIGINE DE LA DEMANDE -->
-    <input type="hidden" name="type_demande" id="typeDemande" value="Prise de contact directe">
-
-    <!-- NOM -->
-    <div class="form-group hidden">
-        <input type="text" name="nom" class="form-control" placeholder="Votre nom" maxlength="100" autocomplete="name" required>
-        <label style="font-size: 12px">Appuyez sur la touche "Entrée" après avoir rempli ce champ.</label>
-    </div>
-
-    <!-- EMAIL -->
-    <div class="form-group hidden">
-        <input type="email" name="email" class="form-control" placeholder="Votre email" maxlength="100" inputmode="email" autocomplete="email" required>
-    </div>
-
-    <!-- TÉLÉPHONE (WHATSAPP) -->
-    <div class="form-group hidden">
-        <input type="tel" name="telephone" class="form-control" placeholder="Votre numéro WhatsApp" maxlength="20" inputmode="tel" autocomplete="tel" pattern="^[0-9+\s()-]{8,20}$">
-    </div>
-
-    <!-- SERVICE SELECTIONNÉ OU SUJET -->
-    <div class="form-group hidden">
-        <select class="form-control" name="service" id="service">
-            <option value="" selected disabled>Choisissez un service</option>
-        </select>
-    </div>
-
-    <!-- MESSAGE -->
-    <div class="form-group hidden" style="margin-bottom: 7.5%;">
-        <textarea name="message" id="projectDescription" class="form-control" rows="7" placeholder="Décrivez votre projet" minlength="10" maxlength="3000" required></textarea>
-    </div>
-
-    <!-- BOUTON D'ENVOI -->
-    <div class="form-group hidden">
-        <input type="submit" value="Envoyer" class="btn btn-primary py-3 px-5">
-    </div>
-
-</form>
+            <form action="https://formsubmit.co/988721fb2f5b13188581b1f478428cf5" method="POST" class="bg-light p-5 contact-form">
+              <!-- Désactive le reCAPTCHA de FormSubmit -->
+              <input type="hidden" name="_captcha" value="false">
+              <div class="form-group">
+                <input type="text" name="nom" class="form-control" placeholder="Nom">
+              </div>
+              <div class="form-group">
+                <input type="text" name="email" class="form-control" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <input type="text" name="sujet" class="form-control" placeholder="Sujet">
+              </div>
+              <div class="form-group">
+                <textarea name="message" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Envoyer" class="btn btn-primary py-3 px-5">
+              </div>
+            </form>
+          
           </div>
 
           <div class="col-md-6 d-flex">
