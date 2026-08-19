@@ -107,8 +107,14 @@
         <div class="row no-gutters block-9">
           <div class="col-md-6 order-md-last d-flex">
             <form action="https://formsubmit.co/988721fb2f5b13188581b1f478428cf5" method="POST" class="bg-light p-5 contact-form">
-              <!-- Désactive le reCAPTCHA de FormSubmit -->
+              
+              <!-- CONFIGURATION FORMSUBMIT -->
+              <input type="hidden" name="_subject" id="formSubject" value="Prise de contact directe">
               <input type="hidden" name="_captcha" value="false">
+              
+              <!-- PIÈGE HONEYPOT (Invisible pour les utilisateurs, piège les bots) -->
+              <input type="text" name="_honey" style="display:none !important;" tabindex="-1" autocomplete="off">
+              
               <div class="form-group">
                 <input type="text" name="nom" class="form-control" placeholder="Nom">
               </div>
