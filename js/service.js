@@ -19,33 +19,70 @@ document.addEventListener("DOMContentLoaded", () => {
     const fields = contactForm ? Array.from(contactForm.querySelectorAll(".form-group")) : [];
 
     // ======================================================
-    // 0. GESTION DES BOUTONS D'ACCUEIL (OUI / ESTIMER / RETOUR)
+    // FONCTIONS UTILITAIRES POUR LES ANIMATIONS CSS
+    // ======================================================
+    function animateShow(element, callback) {
+        if (!element) return;
+        element.classList.remove("hidden", "animate-out");
+        element.classList.add("animate-in");
+
+        const handleAnimationEnd = () => {
+            element.classList.remove("animate-in");
+            element.removeEventListener("animationend", handleAnimationEnd);
+            if (typeof callback === "function") callback();
+        };
+
+        element.addEventListener("animationend", handleAnimationEnd);
+    }
+
+    function animateHide(element, callback) {
+        if (!element || element.classList.contains("hidden")) {
+            if (typeof callback === "function") callback();
+            return;
+        }
+
+        element.classList.remove("animate-in");
+        element.classList.add("animate-out");
+
+        const handleAnimationEnd = () => {
+            element.classList.add("hidden");
+            element.classList.remove("animate-out");
+            element.removeEventListener("animationend", handleAnimationEnd);
+            if (typeof callback === "function") callback();
+        };
+
+        element.addEventListener("animationend", handleAnimationEnd);
+    }
+
+    // ======================================================
+    // 0. GESTION DES BOUTONS D'ACCUEIL AVEC ANIMATION
     // ======================================================
     if (startBtn) {
         startBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            if (contactForm) contactForm.classList.remove("hidden");
-            if (quoteForm) quoteForm.classList.add("hidden");
-            if (cancelBtn) cancelBtn.classList.remove("hidden");
-            revealFormFields();
+            animateHide(quoteForm, () => {
+                animateShow(contactForm, () => revealFormFields());
+            });
+            animateShow(cancelBtn);
         });
     }
 
     if (quoteBtn) {
         quoteBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            if (quoteForm) quoteForm.classList.remove("hidden");
-            if (contactForm) contactForm.classList.add("hidden");
-            if (cancelBtn) cancelBtn.classList.remove("hidden");
+            animateHide(contactForm, () => {
+                animateShow(quoteForm);
+            });
+            animateShow(cancelBtn);
         });
     }
 
     if (cancelBtn) {
         cancelBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            if (contactForm) contactForm.classList.add("hidden");
-            if (quoteForm) quoteForm.classList.add("hidden");
-            cancelBtn.classList.add("hidden");
+            animateHide(contactForm);
+            animateHide(quoteForm);
+            animateHide(cancelBtn);
         });
     }
 
@@ -64,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Mettre à jour le type de demande et le sujet FormSubmit
             const typeDemandeInput = document.getElementById("typeDemande");
             const formSubjectInput = document.getElementById("formSubject");
-            
+
             if (typeDemandeInput) {
                 typeDemandeInput.value = "Demande de devis avec estimation";
             }
@@ -108,13 +145,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     textarea.value = summaryText;
                 }
 
-                // Masquer l'estimateur et afficher le formulaire de contact
-                if (quoteForm) quoteForm.classList.add("hidden");
-                contactForm.classList.remove("hidden");
-                if (cancelBtn) cancelBtn.classList.remove("hidden");
-
-                // Révéler les champs intelligents
-                revealFormFields();
+                // Transition animée de l'estimateur vers le formulaire de contact
+                animateHide(quoteForm, () => {
+                    animateShow(contactForm, () => revealFormFields());
+                });
+                animateShow(cancelBtn);
             }
         });
     }
@@ -235,7 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // PRÉPARATION DE L'ENVOI
             const submitBtn = contactForm.querySelector("input[type='submit']");
             const originalBtnValue = submitBtn ? submitBtn.value : "Envoyer";
-            
+
             if (submitBtn) {
                 submitBtn.value = "Envoi en cours...";
                 submitBtn.disabled = true;
@@ -254,15 +289,15 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(response => {
                 if (response.ok) {
                     alert("Votre message a bien été envoyé ! Nous vous recontacterons sous peu.");
-                    
+
                     localStorage.setItem(LAST_SUBMIT_KEY, Date.now().toString());
 
                     contactForm.reset();
                     if (quoteForm) quoteForm.reset();
 
-                    contactForm.classList.add("hidden");
-                    if (quoteForm) quoteForm.classList.add("hidden");
-                    if (cancelBtn) cancelBtn.classList.add("hidden");
+                    animateHide(contactForm);
+                    animateHide(quoteForm);
+                    animateHide(cancelBtn);
                 } else {
                     alert("Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
                 }
