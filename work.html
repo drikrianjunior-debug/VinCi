@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Evans - Free Bootstrap 4 Template by Colorlib</title>
+    <title>VinCi | Réalisations</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+    <link rel="icon" href="images/3-removebg-preview.png" sizes="any">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
@@ -27,20 +27,42 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+	<style>
+		/* Assure que le conteneur masque le débordement de la vidéo */
+.video-container {
+    position: relative;
+    overflow: hidden;
+    padding: 0; /* Évite les décalages */
+}
+
+/* Force la vidéo à remplir tout le conteneur en conservant les proportions (comme background-size: cover) */
+.bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover; /* Reproduit le comportement de background-size: cover */
+    z-index: 0;
+}
+	</style>
   </head>
   <body>
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Evans</a>
+	      <a class="navbar-brand" href="index.html">VinCi</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	        	<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	        	<li class="nav-item active"><a href="work.html" class="nav-link">Work</a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+	        	<li class="nav-item"><a href="about.html" class="nav-link">A propos</a></li>
+	        	<li class="nav-item"><a href="work.html" class="nav-link">Réalisations</a></li>
+	          <li class="nav-item"><a href="contact.html" class="nav-link">Contacts</a></li>
 	        </ul>
 	      </div>
 	    </div>
@@ -52,8 +74,8 @@
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end">
           <div class="col-md-9 ftco-animate pb-5">
-            <h2 class="mb-3 bread">Beautiful Work</h2>
-            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>About us <i class="ion-ios-arrow-forward"></i></span></p>
+            <h2 class="mb-3 bread">Vin Réalisations</h2>
+            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Accueil <i class="ion-ios-arrow-forward"></i></a></span> <span>À propos de nous <i class="ion-ios-arrow-forward"></i></span></p>
           </div>
         </div>
       </div>
@@ -65,7 +87,7 @@
 	  			<div class="col-md-6 portfolio-wrap ftco-animate">
 	  				<div class="row align-items-center">
 	  					<div class="col-md-12">
-		  					<div class="img js-fullheight" style="background-image: url(images/work-1.jpg);">
+		  					<div class="img js-fullheight" style="background-image: url(images/Gemini_Generated_Image_x1q56rx1q56rx1q5.png);">
 		  						
 		  					</div>
 	  					</div>
@@ -74,12 +96,15 @@
 	  							<div class="px-0 pt-5">
 	  								<div class="desc">
 		  								<div class="top top-relative">
-			  								<span class="subheading">Web Design {12/06/2019}</span>
-				  							<h2 class="mb-4"><a href="single.html">Midway</a></h2>
+			  								<span class="subheading">Web Development {05/08/2026}</span>
+				  							<h2 class="mb-4"><a href="https://binlenoir.com" target="_blank">BIN LENOIR</a></h2>
 			  							</div>
 			  							<div class="absolute relative">
-				  							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-				  							<p><a href="single.html" class="custom-btn">View Portfolio</a></p>
+				  							<p>BIN LENOIR est une boutique dédiée aux vêtements et accessoires qui allient élégance, qualité et modernité.
+												 Nous sélectionnons des pièces tendance pour sublimer votre style en toute occasion. 
+												 Des tenues casual aux looks les plus raffinés, chaque article est choisi avec soin pour répondre à vos envies. 
+												 Chez BIN LENOIR, exprimez votre personnalité avec confiance et distinction.</p>
+				  							<p><a href="https://binlenoir.com" class="custom-btn" target="_blank">Projet Terminé</a></p>
 			  							</div>
 		  							</div>
 	  							</div>
@@ -90,7 +115,7 @@
 	  			<div class="col-md-6 portfolio-wrap ftco-animate">
 	  				<div class="row align-items-center">
 	  					<div class="col-md-12">
-		  					<div class="img js-fullheight" style="background-image: url(images/work-2.jpg);">
+		  					<div class="img js-fullheight" style="background-image: url(images/noz.png);">
 		  						
 		  					</div>
 	  					</div>
@@ -99,12 +124,15 @@
 	  							<div class="px-0 pt-5">
 	  								<div class="desc">
 		  								<div class="top top-relative">
-			  								<span class="subheading">Writing {12/06/2019}</span>
-				  							<h2 class="mb-4"><a href="single.html">Workplace Office</a></h2>
+			  								<span class="subheading">Web Development {15/08/2026}</span>
+				  							<h2 class="mb-4"><a href="https://nozam-ten.vercel.app" target="_blank">NOZAM</a></h2>
 			  							</div>
 			  							<div class="absolute relative">
-				  							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-				  							<p><a href="single.html" class="custom-btn">View Portfolio</a></p>
+				  							<p>NOZAM est votre destination de choix pour les accessoires, meubles et articles indispensables à l'aménagement de votre maison.
+												 Nous vous proposons des produits alliant qualité, esthétique et praticité pour créer un intérieur qui vous ressemble.
+												De la décoration aux équipements du quotidien, chaque pièce est sélectionnée avec soin pour apporter confort et élégance à votre espace.
+												 Avec NOZAM, transformez votre maison en un lieu de vie accueillant et harmonieux.</p>
+				  							<p><a href="https://nozam-ten.vercel.app" class="custom-btn" target="_blank">Projet en cours</a></p>
 			  							</div>
 		  							</div>
 	  							</div>
@@ -112,99 +140,32 @@
 	  					</div>
 	  				</div>
 	  			</div>
+
 	  			<div class="col-md-6 portfolio-wrap ftco-animate">
 	  				<div class="row align-items-center">
 	  					<div class="col-md-12">
-		  					<div class="img js-fullheight" style="background-image: url(images/work-3.jpg);">
-		  						
-		  					</div>
+		  					<div class="col-md-10 img js-fullheight video-container">
+    <video autoplay loop muted playsinline class="bg-video" id="video">
+        <source src="images/VinD2.mp4" type="video/mp4">
+        Votre navigateur ne prend pas en charge les vidéos HTML5.
+    </video>
+</div>
 	  					</div>
 	  					<div class="col-md-12">
 	  						<div class="text">
 	  							<div class="px-0 pt-5">
 	  								<div class="desc">
 		  								<div class="top top-relative">
-			  								<span class="subheading">Illustration {12/06/2019}</span>
-				  							<h2 class="mb-4"><a href="single.html">Jacket Leather</a></h2>
+			  								<span class="subheading">Video editing {19/08/2026}</span>
+				  							<h2 class="mb-4"><a href="#video">Vin Déo</a></h2>
 			  							</div>
 			  							<div class="absolute relative">
-				  							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-				  							<p><a href="single.html" class="custom-btn">View Portfolio</a></p>
-			  							</div>
-		  							</div>
-	  							</div>
-	  						</div>
-	  					</div>
-	  				</div>
-	  			</div>
-	  			<div class="col-md-6 portfolio-wrap ftco-animate">
-	  				<div class="row align-items-center">
-	  					<div class="col-md-12">
-		  					<div class="img js-fullheight" style="background-image: url(images/work-4.jpg);">
-		  						
-		  					</div>
-	  					</div>
-	  					<div class="col-md-12">
-	  						<div class="text">
-	  							<div class="px-0 pt-5">
-	  								<div class="desc">
-		  								<div class="top top-relative">
-			  								<span class="subheading">Application {12/06/2019}</span>
-				  							<h2 class="mb-4"><a href="single.html">Topless</a></h2>
-			  							</div>
-			  							<div class="absolute relative">
-				  							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-				  							<p><a href="single.html" class="custom-btn">View Portfolio</a></p>
-			  							</div>
-		  							</div>
-	  							</div>
-	  						</div>
-	  					</div>
-	  				</div>
-	  			</div>
-	  			<div class="col-md-6 portfolio-wrap ftco-animate">
-	  				<div class="row align-items-center">
-	  					<div class="col-md-12">
-		  					<div class="img js-fullheight" style="background-image: url(images/work-5.jpg);">
-		  						
-		  					</div>
-	  					</div>
-	  					<div class="col-md-12">
-	  						<div class="text">
-	  							<div class="px-0 pt-5">
-	  								<div class="desc">
-		  								<div class="top top-relative">
-			  								<span class="subheading">Writing {12/06/2019}</span>
-				  							<h2 class="mb-4"><a href="single.html">Fashion Style</a></h2>
-			  							</div>
-			  							<div class="absolute relative">
-				  							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-				  							<p><a href="single.html" class="custom-btn">View Portfolio</a></p>
-			  							</div>
-		  							</div>
-	  							</div>
-	  						</div>
-	  					</div>
-	  				</div>
-	  			</div>
-	  			<div class="col-md-6 portfolio-wrap ftco-animate">
-	  				<div class="row align-items-center">
-	  					<div class="col-md-12">
-		  					<div class="img js-fullheight" style="background-image: url(images/work-6.jpg);">
-		  						
-		  					</div>
-	  					</div>
-	  					<div class="col-md-12">
-	  						<div class="text">
-	  							<div class="px-0 pt-5">
-	  								<div class="desc">
-		  								<div class="top top-relative">
-			  								<span class="subheading">Illustration {12/06/2019}</span>
-				  							<h2 class="mb-4"><a href="single.html">Prickly</a></h2>
-			  							</div>
-			  							<div class="absolute relative">
-				  							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.</p>
-				  							<p><a href="single.html" class="custom-btn">View Portfolio</a></p>
+				  							<p>Chez VinCi, nous transformons votre identité visuelle en un levier d'attraction puissant grâce à notre service de Graphic Design. 
+												Nos designers créent des chartes graphiques sur-mesure, des logos percutants et des visuels captivants qui reflètent l'essence unique de votre entreprise. 
+												Nous allions esthétique moderne et stratégie de marque pour marquer durablement l'esprit de vos clients sur tous vos supports numériques et imprimés. 
+												Donnez une image forte, cohérente et professionnelle à vos projets pour vous démarquer instantanément de la concurrence. 
+												Confiez-nous votre univers visuel et faites de chaque détail graphique une véritable expérience pour vos utilisateurs.</p>
+				  							<p><a href="#video" class="custom-btn">Projet Terminé</a></p>
 			  							</div>
 		  							</div>
 	  							</div>
@@ -217,66 +178,35 @@
 
     </section>
 
-    <footer class="ftco-footer ftco-section">
+   <footer class="ftco-footer ftco-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">About Us</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+            <div class="ftco-footer-widget mb-4 col-md-12 text-center">
+              <h1 class="ftco-heading-h2"><b style="color: #fff; font-family: 'Poppins',Arial,sans-serif; font-size: 54px;">VINCI</b></h1>
+
+              <ul class="ftco-footer-social list-unstyled float-md-center float-ctr mt-5">
+                <li class="ftco-animate"><a href="#"><span class="icon-linkedin" target="_blank"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook" target="_blank"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram" target="_blank"></span></a></li>
+				<li class="ftco-animate"><a href="https://maps.app.goo.gl/P8dwYahwQcQk4uDL8" target="_blank"><span class="icon-map-marker"></span></a></li>
+                <li class="ftco-animate"><a href="callto:2250759128035" target="_blank"><span class="icon-phone"></span></a></li>
+                <li class="ftco-animate"><a href="mailto:drikrianjunior@gmail.com" target="_blank"><span class="icon-envelope"></span></a></li>
               </ul>
             </div>
           </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">Information</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Portfolio</a></li>
-                <li><a href="#" class="py-2 d-block">Privacy</a></li>
-                <li><a href="#" class="py-2 d-block">Terms Condition</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Links</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Home</a></li>
-                <li><a href="#" class="py-2 d-block">About</a></li>
-                <li><a href="#" class="py-2 d-block">Work</a></li>
-                <li><a href="#" class="py-2 d-block">Contact</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Have a Questions?</h2>
-            	<div class="block-23 mb-3">
-	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
-	              </ul>
-	            </div>
-            </div>
-          </div>
-        </div>
+		  </div>
         <div class="row">
           <div class="col-md-12 text-center">
 
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tous droits réservés |  By <b style="color: #ffc107">Vin</b>Ci - <I><B><a href="https://jr-seri-portfolio.vercel.app/" target="_blank">JR.</a></B> </I> 
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
           </div>
         </div>
       </div>
     </footer>
     
-  
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>

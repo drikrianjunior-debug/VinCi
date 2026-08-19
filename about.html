@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Evans - Free Bootstrap 4 Template by Colorlib</title>
+    <title>VinCi | À propos de nous</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+    <link rel="icon" href="images/3-removebg-preview.png" sizes="any">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
@@ -27,20 +28,44 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+      .hidden{display:none;}
+      .form-group{
+    opacity:1;
+    max-height:200px;
+    transition:.4s ease;
+}
+
+.form-group.hidden{
+    opacity:0;
+    max-height:0;
+    overflow:hidden;
+    margin:0;
+    padding:0;
+}
+.playfair {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+}
+    </style>
+
   </head>
   <body>
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Evans</a>
+	      <a class="navbar-brand" href="index.html">VinCi</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	        	<li class="nav-item active"><a href="about.html" class="nav-link">About</a></li>
-	        	<li class="nav-item"><a href="work.html" class="nav-link">Work</a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+	        	<li class="nav-item"><a href="about.html" class="nav-link">A propos</a></li>
+	        	<li class="nav-item"><a href="work.html" class="nav-link">Réalisations</a></li>
+	          <li class="nav-item"><a href="contact.html" class="nav-link">Contacts</a></li>
 	        </ul>
 	      </div>
 	    </div>
@@ -52,8 +77,8 @@
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end">
           <div class="col-md-9 ftco-animate pb-5">
-            <h2 class="mb-3 bread">About Us</h2>
-            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>About us <i class="ion-ios-arrow-forward"></i></span></p>
+            <h2 class="mb-3 bread">À propos de nous</h2>
+            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Accueil <i class="ion-ios-arrow-forward"></i></a></span> <span>À propos de nous <i class="ion-ios-arrow-forward"></i></span></p>
           </div>
         </div>
       </div>
@@ -63,12 +88,11 @@
     	<div class="container">
     		<div class="row justify-content-end">
     			<div class="col-md-4 d-flex">
-    				<div class="img" style="background-image: url('images/bg_2.jpg')"></div>
+    				<div class="img" style="background-image: url('images/4-removebg-preview.png')"></div>
     			</div>
-    			<div class="col-md-8 py-md-5 pt-4 p-md-5">
-    				<h2>Web <span>Designer</span>, hobbyist writer, and the CEO &amp; Founder of <span>Evans</span></h2>
-    				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-    				<p><a href="#" class="btn btn-primary">Contact Us</a></p>
+    			<div class="col-md-8">
+    				<h2>Web <span>Development</span>, Graphic Designs, and Telecoms &amp; All by <span>VinCi</span></h2>
+    				<p>Une jeune équipe rassemblant uniquement des jeunes passionnés qui mettent l'accent sur l'originalité, la facilité d'utilisation, la fiabilité, l'optimisation de vos outils, les avancées technologiques par les services détaillés suivant...</p>
     			</div>
     		</div>
     	</div>
@@ -77,12 +101,14 @@
     <section class="services-section py-5 py-md-0">
       <div class="container">
         <div class="row no-gutters d-flex">
+
           <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
             <div class="media block-6 services d-block">
               <div class="icon"><span class="flaticon-layers"></span></div>
               <div class="media-body">
-                <h3 class="heading mb-3">Web Design</h3>
-                <p>	203 Fake St. Mountain View, San Francisco, California, USA</p>
+                <h3 class="heading mb-3">Web & Graphic Design</h3>
+                <p>	Notre jeune équipe créative conçoit des identités visuelles et des designs web modernes qui valorisent votre marque. 
+                  <br>Nous allions innovation, esthétique et performance pour donner vie à vos idées.</p>
               </div>
             </div>      
           </div>
@@ -91,7 +117,9 @@
               <div class="icon"><span class="flaticon-web-programming"></span></div>
               <div class="media-body">
                 <h3 class="heading mb-3">Web Development</h3>
-                <p>A small river named Duden flows by their place and supplies.</p>
+                <p>Notre jeune équipe développe des sites web et des applications performants, sécurisés et adaptés à vos besoins.
+                  <br>Nous créons des solutions modernes qui accompagnent durablement la croissance de votre activité.
+                </p>
               </div>
             </div>    
           </div>
@@ -99,8 +127,10 @@
             <div class="media block-6 services d-block">
               <div class="icon"><span class="flaticon-idea"></span></div>
               <div class="media-body">
-                <h3 class="heading mb-3">Graphic Design</h3>
-                <p>A small river named Duden flows by their place and supplies.</p>
+                <h3 class="heading mb-3">Marketing Advice & web Development</h3>
+                <p>Notre jeune équipe vous accompagne avec des stratégies marketing efficaces et des solutions web sur mesure.
+                  <br>Nous combinons créativité, expertise digitale et innovation pour accélérer votre développement.
+                </p>
               </div>
             </div>      
           </div>
@@ -108,11 +138,14 @@
             <div class="media block-6 services active-2 d-block">
               <div class="icon"><span class="flaticon-contract"></span></div>
               <div class="media-body">
-                <h3 class="heading mb-3">Writing</h3>
-                <p>A small river named Duden flows by their place and supplies.</p>
+                <h3 class="heading mb-3">Telecom consulting, setup, and maintenance</h3>
+                <p>Notre jeune équipe vous conseille, déploie et assure la maintenance de vos infrastructures télécoms avec professionnalisme.
+                  <br>Nous garantissons des solutions fiables, évolutives et adaptées aux exigences de votre entreprise.
+                </p>
               </div>
             </div>      
           </div>
+
         </div>
       </div>
     </section>
@@ -121,89 +154,112 @@
       <div class="container">
         <div class="row ftco-animate justify-content-center">
         	<div class="col-md-5 d-flex">
-        		<div class="testimony-img" style="background-image: url(images/bg_2.jpg);"></div>
+        		<div class="testimony-img" style="background-image: url(images/Gemini_Generated_Image_5s01dq5s01dq5s01.jpg);"></div>
         	</div>
           <div class="col-md-7 py-5 pl-md-5">
-          	<div class="heading-section heading-section-white pt-4 ftco-animate">
-		          <h2 class="mb-0">Customer Says</h2>
-		        </div>
-            <div class="carousel-testimony owl-carousel ftco-owl">
-              <div class="item">
-                <div class="testimony-wrap pb-4">
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  </div>
-                  <div class="d-flex">
-	                  <div class="user-img" style="background-image: url(images/person_1.jpg)">
-	                  </div>
-	                  <div class="pos ml-3">
-	                  	<p class="name">Jeff Nucci</p>
-	                    <span class="position">Businessman</span>
-	                  </div>
-	                </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap pb-4">
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  </div>
-                  <div class="d-flex">
-	                  <div class="user-img" style="background-image: url(images/person_1.jpg)">
-	                  </div>
-	                  <div class="pos ml-3">
-	                  	<p class="name">Jeff Nucci</p>
-	                    <span class="position">Businessman</span>
-	                  </div>
-	                </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap pb-4">
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  </div>
-                  <div class="d-flex">
-	                  <div class="user-img" style="background-image: url(images/person_1.jpg)">
-	                  </div>
-	                  <div class="pos ml-3">
-	                  	<p class="name">Jeff Nucci</p>
-	                    <span class="position">Businessman</span>
-	                  </div>
-	                </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap pb-4">
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  </div>
-                  <div class="d-flex">
-	                  <div class="user-img" style="background-image: url(images/person_1.jpg)">
-	                  </div>
-	                  <div class="pos ml-3">
-	                  	<p class="name">Jeff Nucci</p>
-	                    <span class="position">Businessman</span>
-	                  </div>
-	                </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="testimony-wrap pb-4">
-                  <div class="text">
-                    <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  </div>
-                  <div class="d-flex">
-	                  <div class="user-img" style="background-image: url(images/person_1.jpg)">
-	                  </div>
-	                  <div class="pos ml-3">
-	                  	<p class="name">Jeff Nucci</p>
-	                    <span class="position">Businessman</span>
-	                  </div>
-	                </div>
-                </div>
-              </div>
-            </div>
+
+           <div class="heading-section heading-section-white pt-4 ftco-animate text-center">
+
+    <h2 class="mb-2">Prêt pour un projet ?</h2>
+
+    <p class="mb-4">
+        Nous serons ravis de vous accompagner dans l'évolution de votre entreprise.
+    </p>
+
+    <div id="homeButtons">
+
+        <button id="startBtn" class="btn btn-primary mr-2">
+            Oui
+        </button>
+
+        <button id="quoteBtn" class="btn btn-primary mr-2">
+            Estimer mon devis
+        </button>
+
+        <button id="cancelBtn" class="btn btn-light hidden">
+            Retour
+        </button>
+        <p><br>Rafraîchissez la page pour annuler l'opération en cours.</p>
+    </div>
+
+</div>
+
+
+<!-- =========================
+      FORMULAIRE CONTACT (FORMSUBMIT)
+========================= -->
+
+<form action="https://formsubmit.co/drikrianjunior@gmail.com" method="POST" class="bg-light p-5 contact-form text-center hidden" id="contactForm" style="padding-bottom: 40px;">
+
+    <!-- CONFIGURATION FORMSUBMIT -->
+    <!-- Objet de l'e-mail -->
+    <input type="hidden" name="_subject" id="formSubject" value="Prise de contact directe">
+    
+    <!-- Désactiver le Captcha natif (évite les redirections) -->
+    <input type="hidden" name="_captcha" value="false">
+    
+    <!-- Piège anti-spam Honeypot (laisser vide, les robots le rempliront) -->
+    <input type="text" name="_honey" style="display:none">
+
+    <!-- Champ caché pour identifier le type de demande -->
+    <input type="hidden" name="type_demande" id="typeDemande" value="Prise de contact directe">
+
+    <div class="form-group hidden">
+        <input type="text" name="nom" class="form-control" placeholder="Votre nom" required>
+        <label style="font-size: 12px">Appuyez à chaque fois sur la touche "Entrée" après avoir rempli le champ précédent.</label>
+    </div>
+
+    <div class="form-group hidden">
+        <input type="email" name="email" class="form-control" placeholder="Votre email" required>
+    </div>
+
+    <div class="form-group hidden">
+        <input type="tel" name="telephone" class="form-control" placeholder="Votre numéro WhatsApp">
+    </div>
+
+    <div class="form-group hidden">
+        <select class="form-control" name="service" id="service">
+            <option value="" selected disabled>Choisissez un service</option>
+        </select>
+    </div>
+
+    <div class="form-group hidden" style="margin-bottom: 7.5%;">
+        <textarea name="message" id="projectDescription" class="form-control" rows="7" placeholder="Décrivez votre projet"></textarea>
+    </div>
+
+    <div class="form-group hidden">
+        <input type="submit" class="btn btn-primary py-3 px-5" value="Envoyer">
+    </div>
+
+</form>
+
+
+<!-- =========================
+      ESTIMATION DÉTAILLÉE
+========================= -->
+
+<form class="bg-light p-5 contact-form text-center hidden" id="quoteForm" style="padding-bottom: 70px;">
+
+    <div class="form-group">
+        <label>Quel service recherchez-vous ?</label>
+        <select class="form-control" id="quoteService">
+            <option value="" selected disabled>Choisissez un service</option>
+        </select>
+    </div>
+
+    <!-- Conteneur pour les sous-options dynamiques -->
+    <div id="subOptions" class="text-left mb-4"></div>
+
+    <div class="form-group hidden" id="estimateResult">
+        <h3 class="mb-3">Estimation estimée</h3>
+        <h2 id="estimatePrice"></h2>
+        <button type="button" id="continueBtn" class="btn btn-primary mt-3">
+            Recevoir un devis détaillé
+        </button>
+    </div>
+
+</form>
+
           </div>
         </div>
       </div>
@@ -213,7 +269,7 @@
     	<div class="container">
     		<div class="row justify-content-center">
     			<div class="col-md-10 text-center">
-    				<h2 class="mb-0 font-primary">We've done work of <span class="number" data-number="300">0</span> Portfolio</h2>
+    				<h2 class="mb-0 font-primary"><b style="font-family : Lucida calligraphy;">L</b>et's <b style="font-family : Lucida calligraphy;">I</b>magine  <span class="number" ><b style="font-family : Lucida calligraphy;">O</b>riginality</span>.</h2>
     			</div>
     		</div>
     	</div>
@@ -223,61 +279,32 @@
       <div class="container">
         <div class="row mb-5">
           <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">About Us</h2>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+            <div class="ftco-footer-widget mb-4 col-md-12 text-center">
+              <h1 class="ftco-heading-h2"><b style="color: #fff; font-family: 'Poppins',Arial,sans-serif; font-size: 54px;">VINCI</b></h1>
+
+              <ul class="ftco-footer-social list-unstyled float-md-center float-ctr mt-5">
+                <li class="ftco-animate"><a href="#"><span class="icon-linkedin" target="_blank"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-facebook" target="_blank"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="icon-instagram" target="_blank"></span></a></li>
+				<li class="ftco-animate"><a href="https://maps.app.goo.gl/P8dwYahwQcQk4uDL8" target="_blank"><span class="icon-map-marker"></span></a></li>
+                <li class="ftco-animate"><a href="callto:2250759128035" target="_blank"><span class="icon-phone"></span></a></li>
+                <li class="ftco-animate"><a href="mailto:drikrianjunior@gmail.com" target="_blank"><span class="icon-envelope"></span></a></li>
               </ul>
             </div>
           </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">Information</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Portfolio</a></li>
-                <li><a href="#" class="py-2 d-block">Privacy</a></li>
-                <li><a href="#" class="py-2 d-block">Terms Condition</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Links</h2>
-              <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Home</a></li>
-                <li><a href="#" class="py-2 d-block">About</a></li>
-                <li><a href="#" class="py-2 d-block">Work</a></li>
-                <li><a href="#" class="py-2 d-block">Contact</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Have a Questions?</h2>
-            	<div class="block-23 mb-3">
-	              <ul>
-	                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-	                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-	                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
-	              </ul>
-	            </div>
-            </div>
-          </div>
-        </div>
+		  </div>
         <div class="row">
           <div class="col-md-12 text-center">
 
             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tous droits réservés |  By <b style="color: #ffc107">Vin</b>Ci - <I><B><a href="https://jr-seri-portfolio.vercel.app/" target="_blank">JR.</a></B> </I> 
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
           </div>
         </div>
       </div>
     </footer>
     
+  
   
 
   <!-- loader -->
@@ -299,6 +326,8 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-    
+  <script src="js/service.js"></script>
+
+
   </body>
 </html>
