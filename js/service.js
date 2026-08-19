@@ -3,6 +3,12 @@
 // ======================================================
 
 document.addEventListener("DOMContentLoaded", () => {
+    // ------------------------------------------------------
+    // SÉLECTION DES ÉLÉMENTS DU DOM
+    // ------------------------------------------------------
+    const startBtn = document.getElementById("startBtn");
+    const quoteBtn = document.getElementById("quoteBtn");
+    const cancelBtn = document.getElementById("cancelBtn");
     const contactForm = document.getElementById("contactForm");
     const quoteForm = document.getElementById("quoteForm");
     const continueBtn = document.getElementById("continueBtn");
@@ -10,14 +16,45 @@ document.addEventListener("DOMContentLoaded", () => {
     const serviceSelect = document.getElementById("service");
     const subOptions = document.getElementById("subOptions");
     const estimatePrice = document.getElementById("estimatePrice");
-    const fields = Array.from(contactForm.querySelectorAll(".form-group"));
+    const fields = contactForm ? Array.from(contactForm.querySelectorAll(".form-group")) : [];
+
+    // ======================================================
+    // 0. GESTION DES BOUTONS D'ACCUEIL (OUI / ESTIMER / RETOUR)
+    // ======================================================
+    if (startBtn) {
+        startBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (contactForm) contactForm.classList.remove("hidden");
+            if (quoteForm) quoteForm.classList.add("hidden");
+            if (cancelBtn) cancelBtn.classList.remove("hidden");
+            revealFormFields();
+        });
+    }
+
+    if (quoteBtn) {
+        quoteBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (quoteForm) quoteForm.classList.remove("hidden");
+            if (contactForm) contactForm.classList.add("hidden");
+            if (cancelBtn) cancelBtn.classList.remove("hidden");
+        });
+    }
+
+    if (cancelBtn) {
+        cancelBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (contactForm) contactForm.classList.add("hidden");
+            if (quoteForm) quoteForm.classList.add("hidden");
+            cancelBtn.classList.add("hidden");
+        });
+    }
 
     // ======================================================
     // 1. CONTINUER DEPUIS L'ESTIMATEUR VERS LE FORMULAIRE
     // ======================================================
     if (continueBtn) {
         continueBtn.addEventListener("click", () => {
-            const selectedService = quoteService.value;
+            const selectedService = quoteService ? quoteService.value : "";
 
             // Synchroniser le service sélectionné
             if (selectedService && serviceSelect) {
@@ -39,20 +76,22 @@ document.addEventListener("DOMContentLoaded", () => {
             let summaryText = `--- RÉSUMÉ DE L'ESTIMATION ---\n`;
             summaryText += `Service sélectionné : ${selectedService}\n`;
 
-            const selects = subOptions.querySelectorAll("select");
-            selects.forEach(select => {
-                const label = select.previousElementSibling ? select.previousElementSibling.innerText : "Option";
-                const selectedOptionText = select.options[select.selectedIndex].text;
-                summaryText += `- ${label} : ${selectedOptionText}\n`;
-            });
-
-            const checkboxes = subOptions.querySelectorAll("input[type='checkbox']:checked");
-            if (checkboxes.length > 0) {
-                summaryText += `- Options supplémentaires :\n`;
-                checkboxes.forEach(cb => {
-                    const labelText = cb.nextElementSibling ? cb.nextElementSibling.innerText : "";
-                    summaryText += `   * ${labelText}\n`;
+            if (subOptions) {
+                const selects = subOptions.querySelectorAll("select");
+                selects.forEach(select => {
+                    const label = select.previousElementSibling ? select.previousElementSibling.innerText : "Option";
+                    const selectedOptionText = select.options[select.selectedIndex]?.text || "";
+                    summaryText += `- ${label} : ${selectedOptionText}\n`;
                 });
+
+                const checkboxes = subOptions.querySelectorAll("input[type='checkbox']:checked");
+                if (checkboxes.length > 0) {
+                    summaryText += `- Options supplémentaires :\n`;
+                    checkboxes.forEach(cb => {
+                        const labelText = cb.nextElementSibling ? cb.nextElementSibling.innerText : "";
+                        summaryText += `   * ${labelText}\n`;
+                    });
+                }
             }
 
             if (estimatePrice) {
@@ -63,17 +102,20 @@ document.addEventListener("DOMContentLoaded", () => {
             summaryText += `-----------------------------------\n\nDescription complémentaire : `;
 
             // Injecter dans la textarea
-            const textarea = contactForm.querySelector("textarea[name='message']");
-            if (textarea) {
-                textarea.value = summaryText;
+            if (contactForm) {
+                const textarea = contactForm.querySelector("textarea[name='message']");
+                if (textarea) {
+                    textarea.value = summaryText;
+                }
+
+                // Masquer l'estimateur et afficher le formulaire de contact
+                if (quoteForm) quoteForm.classList.add("hidden");
+                contactForm.classList.remove("hidden");
+                if (cancelBtn) cancelBtn.classList.remove("hidden");
+
+                // Révéler les champs intelligents
+                revealFormFields();
             }
-
-            // Masquer l'estimateur et afficher le formulaire de contact
-            quoteForm.classList.add("hidden");
-            contactForm.classList.remove("hidden");
-
-            // Révéler les champs intelligents
-            revealFormFields();
         });
     }
 
@@ -160,7 +202,6 @@ document.addEventListener("DOMContentLoaded", () => {
             // SÉCURITÉ 1 : Piège Honeypot (Anti-Bot)
             const honeyField = contactForm.querySelector('input[name="_honey"]');
             if (honeyField && honeyField.value !== "") {
-                // Interception discrète d'un bot sans alerter
                 return;
             }
 
@@ -214,16 +255,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (response.ok) {
                     alert("Votre message a bien été envoyé ! Nous vous recontacterons sous peu.");
                     
-                    // Mettre à jour le temps du dernier envoi réussi
                     localStorage.setItem(LAST_SUBMIT_KEY, Date.now().toString());
 
-                    // Réinitialisation des formulaires
                     contactForm.reset();
                     if (quoteForm) quoteForm.reset();
 
-                    // Re-masquer les formulaires si nécessaire
                     contactForm.classList.add("hidden");
-                    if (quoteForm) quoteForm.classList.remove("hidden");
+                    if (quoteForm) quoteForm.classList.add("hidden");
+                    if (cancelBtn) cancelBtn.classList.add("hidden");
                 } else {
                     alert("Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
                 }
