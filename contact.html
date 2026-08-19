@@ -108,13 +108,21 @@
           <div class="col-md-6 order-md-last d-flex">
             <form action="https://formsubmit.co/988721fb2f5b13188581b1f478428cf5" method="POST" class="bg-light p-5 contact-form">
               
-              <!-- CONFIGURATION FORMSUBMIT -->
-              <input type="hidden" name="_subject" id="formSubject" value="Prise de contact directe">
-              <input type="hidden" name="_captcha" value="false">
-              
-              <!-- PIÈGE HONEYPOT (Invisible pour les utilisateurs, piège les bots) -->
-              <input type="text" name="_honey" style="display:none !important;" tabindex="-1" autocomplete="off">
-              
+                  <!-- CONFIGURATION FORMSUBMIT -->
+    <!-- Objet de l'e-mail -->
+    <input type="hidden" name="_subject" id="formSubject" value="Prise de contact directe">
+    
+    <!-- Désactiver le Captcha natif (évite les redirections) -->
+    <input type="hidden" name="_captcha" value="false">
+    
+    <!-- Piège anti-spam Honeypot (laisser vide, les robots le rempliront) -->
+    <input type="text" name="_honey" style="display:none">
+
+    <input type="hidden" name="_cc" value="bsangahamed@gmail.com">
+
+    <!-- Champ caché pour identifier le type de demande -->
+    <input type="hidden" name="type_demande" id="typeDemande" value="Prise de contact directe">
+    <input type="hidden" name="_next" value="https://vin-ci.vercel.app/">
               <div class="form-group">
                 <input type="text" name="nom" class="form-control" placeholder="Nom">
               </div>
