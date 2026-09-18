@@ -106,9 +106,9 @@
       <div class="container-fluid px-0">
         <div class="row no-gutters block-9">
           <div class="col-md-6 order-md-last d-flex">
-            <form action="https://formsubmit.co/988721fb2f5b13188581b1f478428cf5" method="POST" class="bg-light p-5 contact-form">
+            <form id="contactForm" action="https://formsubmit.co/ajax/988721fb2f5b13188581b1f478428cf5" method="POST" class="bg-light p-5 contact-form">
               
-                  <!-- CONFIGURATION FORMSUBMIT -->
+    <!-- CONFIGURATION FORMSUBMIT -->
     <!-- Objet de l'e-mail -->
     <input type="hidden" name="_subject" id="formSubject" value="Prise de contact directe">
     
@@ -123,23 +123,74 @@
     <!-- Champ caché pour identifier le type de demande -->
     <input type="hidden" name="type_demande" id="typeDemande" value="Prise de contact directe">
     <input type="hidden" name="_next" value="https://vin-ci.vercel.app/">
-              <div class="form-group">
-                <input type="text" name="nom" class="form-control" placeholder="Nom">
-              </div>
-              <div class="form-group">
-                <input type="text" name="email" class="form-control" placeholder="Email">
-              </div>
-              <div class="form-group">
-                <input type="text" name="sujet" class="form-control" placeholder="Sujet">
-              </div>
-              <div class="form-group">
-                <textarea name="message" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-              </div>
-              <div class="form-group">
-                <input type="submit" value="Envoyer" class="btn btn-primary py-3 px-5">
-              </div>
-            </form>
-          
+
+    <div class="form-group">
+        <input type="text" name="nom" class="form-control" placeholder="Nom" required>
+    </div>
+    <div class="form-group">
+        <input type="email" name="email" class="form-control" placeholder="Email" required>
+    </div>
+    <div class="form-group">
+        <input type="text" name="sujet" class="form-control" placeholder="Sujet" required>
+    </div>
+    <div class="form-group">
+        <textarea name="message" cols="30" rows="7" class="form-control" placeholder="Message" required></textarea>
+    </div>
+    <div class="form-group">
+        <input type="submit" id="submitBtn" value="Envoyer" class="btn btn-primary py-3 px-5">
+    </div>
+
+    <!-- Zone pour afficher le message de retour -->
+    <div id="formMessage" style="margin-top: 15px; font-weight: 500;"></div>
+</form>
+
+<!-- Script JavaScript pour intercepter la soumission -->
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Empêche le rechargement de la page
+
+    const form = e.target;
+    const submitBtn = document.getElementById('submitBtn');
+    const formMessage = document.getElementById('formMessage');
+    
+    // Désactiver le bouton et indiquer le chargement
+    submitBtn.disabled = true;
+    submitBtn.value = "Envoi en cours...";
+    formMessage.textContent = "";
+
+    // Récupération des données
+    const formData = new FormData(form);
+
+    // Requête AJAX vers FormSubmit
+    fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw new Error('Erreur réseau');
+    })
+    .then(data => {
+        formMessage.style.color = "#28a745"; // Vert (succès)
+        formMessage.textContent = "Votre message a été envoyé avec succès ! Nous vous recontacterons bientôt.";
+        form.reset(); // Vide les champs du formulaire
+    })
+    .catch(error => {
+        formMessage.style.color = "#dc3545"; // Rouge (erreur)
+        formMessage.textContent = "Une erreur est survenue lors de l'envoi. Veuillez réessayer.";
+    })
+    .finally(() => {
+        // Restauration du bouton
+        submitBtn.disabled = false;
+        submitBtn.value = "Envoyer";
+    });
+});
+</script>
           </div>
 
           <div class="col-md-6 d-flex">
