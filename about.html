@@ -44,6 +44,10 @@
     margin:0;
     padding:0;
 }
+/* Le champ message dépasse les 200px de .form-group : on lui laisse la place nécessaire (une fois visible) */
+.form-group.tall:not(.hidden){
+    max-height:400px;
+}
 .playfair {
     font-family: "Playfair Display", serif;
     font-weight: 700;
@@ -179,61 +183,55 @@
         <button id="cancelBtn" class="btn btn-light hidden">
             Retour
         </button>
-        <p><br>Rafraîchissez la page pour annuler l'opération en cours.</p>
     </div>
 
 </div>
 
 
 <!-- =========================
-      FORMULAIRE CONTACT (FORMSUBMIT)
+      FORMULAIRE CONTACT (EMAILJS)
 ========================= -->
 
-<form action="https://formsubmit.co/988721fb2f5b13188581b1f478428cf5" method="POST" class="bg-light p-5 contact-form text-center hidden" id="contactForm" style="padding-bottom: 40px;">
+<form class="bg-light p-5 contact-form text-center hidden" id="contactForm" style="padding-bottom: 40px;">
 
-    <!-- CONFIGURATION FORMSUBMIT -->
-    <!-- Objet de l'e-mail -->
-    <input type="hidden" name="_subject" id="formSubject" value="Prise de contact directe">
-    
-    <!-- Désactiver le Captcha natif (évite les redirections) -->
-    <input type="hidden" name="_captcha" value="false">
-    
-    <!-- Piège anti-spam Honeypot (laisser vide, les robots le rempliront) -->
-    <input type="text" name="_honey" style="display:none">
-
-    <input type="hidden" name="_cc" value="bsangahamed@gmail.com">
-
-    <!-- Champ caché pour identifier le type de demande -->
+    <!-- Champs techniques (remplis par le script, envoyés à EmailJS) -->
+    <input type="hidden" name="sujet" id="formSubject" value="Prise de contact directe">
     <input type="hidden" name="type_demande" id="typeDemande" value="Prise de contact directe">
-    <input type="hidden" name="_next" value="https://vin-ci.vercel.app/">
-    
-    <div class="form-group hidden">
-        <input type="text" name="nom" class="form-control" placeholder="Votre nom" required>
-        <label style="font-size: 12px">Appuyez à chaque fois sur la touche "Entrée" après avoir rempli le champ précédent.</label>
+    <input type="hidden" name="details_devis" id="quoteDetails" value="">
+
+    <!-- Piège anti-spam : invisible pour les humains, les robots le remplissent -->
+    <input type="text" name="website" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px;">
+
+    <div class="form-group hidden" data-step="nom">
+        <input type="text" name="nom" class="form-control" placeholder="Votre nom" autocomplete="name" enterkeyhint="next" required>
+        <label style="font-size: 12px">Le champ suivant apparaît automatiquement.</label>
     </div>
 
-    <div class="form-group hidden">
-        <input type="email" name="email" class="form-control" placeholder="Votre email" required>
+    <div class="form-group hidden" data-step="email">
+        <input type="email" name="email" class="form-control" placeholder="Votre email" autocomplete="email" enterkeyhint="next" required>
     </div>
 
-    <div class="form-group hidden">
-        <input type="tel" name="telephone" class="form-control" placeholder="Votre numéro WhatsApp">
+    <div class="form-group hidden" data-step="telephone" data-optional>
+        <input type="tel" name="telephone" class="form-control" placeholder="Votre numéro WhatsApp (facultatif)" autocomplete="tel" inputmode="tel" enterkeyhint="next">
     </div>
 
-    <div class="form-group hidden">
-        <select class="form-control" name="service" id="service">
+    <div class="form-group hidden" data-step="service">
+        <select class="form-control" name="service" id="service" required>
             <option value="" selected disabled>Choisissez un service</option>
         </select>
     </div>
 
-    <div class="form-group hidden" style="margin-bottom: 7.5%;">
-        <textarea name="message" minlength="80" id="projectDescription" class="form-control" rows="7" placeholder="Décrivez votre projet"></textarea>
-        <label style="font-size: 10px; margin-bottom: 4%;">Cliquez dans la zone de message puis appuyez "Entrée" pour afficher le bouton "Envoyer"</label>
+    <div class="form-group tall hidden" data-step="message">
+        <textarea name="message" minlength="80" id="projectDescription" class="form-control" rows="6" placeholder="Décrivez votre projet" required></textarea>
+        <label id="charCount" style="font-size: 12px; margin-top: 6px;">0 / 80 caractères minimum</label>
     </div>
 
-    <div class="form-group hidden">
+    <div class="form-group hidden" data-step="envoyer">
         <input type="submit" class="btn btn-primary py-3 px-5" value="Envoyer">
     </div>
+
+    <!-- Zone d'affichage du résultat de l'envoi -->
+    <div id="formMessage" role="status" aria-live="polite" style="margin-top: 15px; font-weight: 500;"></div>
 
 </form>
 
@@ -330,8 +328,295 @@
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
   <script src="js/service.js"></script>
+<!-- SDK EmailJS (identique à contact.html) -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 <script>
-  
+(function () {
+  'use strict';
+
+  /* ---------- Configuration EmailJS (mêmes identifiants que contact.html) ---------- */
+  var EMAILJS_PUBLIC_KEY  = 'Hb66sYMOep1uzcWM5';
+  var EMAILJS_SERVICE_ID  = 'service_b5vu22o';
+  var EMAILJS_TEMPLATE_ID = 'template_b0w8nyc';
+  var MIN_MESSAGE = 80;
+  var DEFAULT_TYPE = 'Prise de contact directe';
+
+  if (typeof emailjs !== 'undefined') {
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }
+
+  /* ---------- Raccourcis DOM ---------- */
+  var $  = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  var form       = $('#contactForm');
+  var quoteForm  = $('#quoteForm');
+  var startBtn   = $('#startBtn');
+  var quoteBtn   = $('#quoteBtn');
+  var cancelBtn  = $('#cancelBtn');
+  if (!form) return;
+
+  var groups        = $$('.form-group[data-step]', form);
+  var textarea      = $('#projectDescription');
+  var counter       = $('#charCount');
+  var msgBox        = $('#formMessage');
+  var submitBtn     = $('input[type="submit"]', form);
+  var serviceSelect = $('#service');
+  var subjectInput  = $('#formSubject');
+  var typeInput     = $('#typeDemande');
+  var detailsInput  = $('#quoteDetails');
+
+  function idx(name) {
+    for (var i = 0; i < groups.length; i++) if (groups[i].dataset.step === name) return i;
+    return -1;
+  }
+  var MESSAGE_IDX = idx('message');
+  var SUBMIT_IDX  = idx('envoyer');
+
+  function controlOf(g) { return g.querySelector('input, select, textarea'); }
+  function isFilled(g) {
+    var c = controlOf(g);
+    return !!c && c.value.trim() !== '' && c.checkValidity();
+  }
+
+  /* ---------- Liste de secours des services (si service.js ne remplit pas le select) ---------- */
+  window.addEventListener('load', function () {
+    if (serviceSelect && serviceSelect.options.length <= 1) {
+      [
+        'Web & Graphic Design',
+        'Web Development',
+        'Marketing Advice & Web Development',
+        'Telecom consulting, setup, and maintenance'
+      ].forEach(function (label) {
+        var o = document.createElement('option');
+        o.value = label; o.textContent = label;
+        serviceSelect.appendChild(o);
+      });
+    }
+  });
+
+  /* ---------- Affichage progressif des champs ---------- */
+
+  // Révèle le champ suivant ; enchaîne si le champ suivant est facultatif
+  // ou déjà rempli (ex : service choisi dans l'estimation).
+  function revealFrom(i) {
+    var j = i + 1;
+    while (j <= MESSAGE_IDX) {
+      var g = groups[j];
+      g.classList.remove('hidden');
+      var chain = g.hasAttribute('data-optional') ||
+                  (controlOf(g).tagName === 'SELECT' && isFilled(g));
+      if (!chain) break;
+      j++;
+    }
+    if (MESSAGE_IDX > -1 && !groups[MESSAGE_IDX].classList.contains('hidden')) updateCounter();
+  }
+
+  // Place le curseur sur le premier champ visible encore vide
+  function focusNextEmpty(from) {
+    for (var j = from + 1; j <= MESSAGE_IDX; j++) {
+      var g = groups[j];
+      if (g.classList.contains('hidden')) break;
+      if (!isFilled(g)) {
+        (function (c) { setTimeout(function () { c.focus(); }, 50); })(controlOf(g));
+        return;
+      }
+    }
+  }
+
+  groups.forEach(function (g, i) {
+    if (i >= MESSAGE_IDX) return;           // message + bouton gérés à part
+    var c = controlOf(g);
+
+    if (c.tagName === 'SELECT') {
+      c.addEventListener('change', function () {
+        if (isFilled(g)) { revealFrom(i); focusNextEmpty(i); }
+      });
+    } else {
+      // Entrée = passer au champ suivant (au lieu de soumettre le formulaire)
+      c.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter') return;
+        e.preventDefault();
+        if (!c.checkValidity()) { c.reportValidity(); return; }
+        revealFrom(i); focusNextEmpty(i);
+      });
+      // Quitter le champ (clic ailleurs, Tab, « Suivant » du clavier mobile) suffit aussi
+      c.addEventListener('blur', function () {
+        if (isFilled(g)) revealFrom(i);
+      });
+    }
+  });
+
+  // Message : compteur + le bouton « Envoyer » apparaît tout seul à 80 caractères
+  function updateCounter() {
+    var n = textarea.value.trim().length;
+    counter.textContent = n >= MIN_MESSAGE
+      ? '✓ Message suffisant, vous pouvez envoyer.'
+      : n + ' / ' + MIN_MESSAGE + ' caractères minimum';
+    groups[SUBMIT_IDX].classList.toggle('hidden', n < MIN_MESSAGE);
+  }
+  textarea.addEventListener('input', updateCounter);
+
+  /* ---------- Remise à zéro ---------- */
+  function resetHiddenDefaults() {
+    subjectInput.value = DEFAULT_TYPE;
+    typeInput.value    = DEFAULT_TYPE;
+    detailsInput.value = '';
+  }
+  function resetSteps() {
+    groups.forEach(function (g) { g.classList.add('hidden'); });
+    counter.textContent = '0 / ' + MIN_MESSAGE + ' caractères minimum';
+  }
+  function resetContactForm() {
+    form.reset();
+    resetHiddenDefaults();   // form.reset() ne remet pas les champs cachés modifiés en JS
+    resetSteps();
+  }
+
+  /* ---------- Ouverture du formulaire ---------- */
+  function selectService(value) {
+    if (!serviceSelect || !value) return;
+    var v = String(value).trim().toLowerCase();
+    for (var i = 0; i < serviceSelect.options.length; i++) {
+      var o = serviceSelect.options[i];
+      if (o.value.toLowerCase() === v || o.text.trim().toLowerCase() === v) {
+        serviceSelect.selectedIndex = i;
+        return;
+      }
+    }
+  }
+
+  function openContact(opts) {
+    opts = opts || {};
+    if (quoteForm) quoteForm.classList.add('hidden');
+    form.classList.remove('hidden');
+    if (startBtn)  startBtn.classList.add('hidden');
+    if (quoteBtn)  quoteBtn.classList.add('hidden');
+    if (cancelBtn) cancelBtn.classList.remove('hidden');
+    msgBox.textContent = '';
+
+    if (opts.type)    typeInput.value    = opts.type;
+    if (opts.subject) subjectInput.value = opts.subject;
+    if (opts.details !== undefined) detailsInput.value = opts.details;
+    if (opts.service) selectService(opts.service);
+
+    var nothingVisible = groups.every(function (g) { return g.classList.contains('hidden'); });
+    if (nothingVisible) {
+      groups[0].classList.remove('hidden');
+      setTimeout(function () { controlOf(groups[0]).focus(); }, 50);
+    }
+  }
+  window.VinCiForm = { open: openContact };   // utilisable depuis service.js
+
+  if (startBtn) startBtn.addEventListener('click', function () { openContact(); });
+
+  // Bouton « Retour » : remet tout à zéro sans recharger la page
+  if (cancelBtn) cancelBtn.addEventListener('click', function () {
+    form.classList.add('hidden');
+    resetContactForm();
+    msgBox.textContent = '';
+    if (quoteForm) {
+      quoteForm.classList.add('hidden');
+      quoteForm.reset();
+      var res = $('#estimateResult'); if (res) res.classList.add('hidden');
+      var sub = $('#subOptions');     if (sub) sub.innerHTML = '';
+    }
+    if (startBtn) startBtn.classList.remove('hidden');
+    if (quoteBtn) quoteBtn.classList.remove('hidden');
+    cancelBtn.classList.add('hidden');
+  });
+
+  // « Recevoir un devis détaillé » : ouvre le formulaire avec le récapitulatif de l'estimation
+  var continueBtn = $('#continueBtn');
+  if (continueBtn) continueBtn.addEventListener('click', function () {
+    try {
+      var qs = $('#quoteService');
+      var serviceLabel = qs && qs.selectedIndex > -1 ? qs.options[qs.selectedIndex].text : '';
+      var parts = [];
+      $$('#subOptions select').forEach(function (s) {
+        if (s.selectedIndex > -1 && s.value) parts.push(s.options[s.selectedIndex].text);
+      });
+      $$('#subOptions input:checked').forEach(function (inp) {
+        var lab = inp.labels && inp.labels[0] ? inp.labels[0].textContent.trim() : inp.value;
+        if (lab) parts.push(lab);
+      });
+      var price = $('#estimatePrice') ? $('#estimatePrice').textContent.trim() : '';
+      if (price) parts.push('Estimation : ' + price);
+
+      openContact({
+        type: 'Demande de devis détaillé',
+        subject: 'Demande de devis' + (serviceLabel ? ' – ' + serviceLabel : ''),
+        service: qs ? qs.value : '',
+        details: parts.join(' | ')
+      });
+    } catch (err) { console.error(err); }
+  });
+
+  /* ---------- Envoi via EmailJS ---------- */
+  var sending = false;
+
+  function showMsg(text, ok) {
+    msgBox.style.color = ok ? '#ffc107' : 'black';
+    msgBox.textContent = text;
+  }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    if (sending) return;
+    if ($('#hp').value) return;                       // robot détecté
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    if (textarea.value.trim().length < MIN_MESSAGE) { textarea.focus(); return; }
+    if (typeof emailjs === 'undefined') {
+      showMsg("Le service d'envoi est indisponible. Vérifiez votre connexion et réessayez.", false);
+      return;
+    }
+
+    var val = function (name) { return form.elements[name].value.trim(); };
+    var serviceText = serviceSelect.selectedIndex > -1 ? serviceSelect.options[serviceSelect.selectedIndex].text : '';
+    var details = detailsInput.value.trim();
+
+    var lignes = [
+      'Type de demande : ' + typeInput.value,
+      'WhatsApp / Téléphone : ' + (val('telephone') || 'non renseigné'),
+      'Service : ' + serviceText
+    ];
+    if (details) lignes.push('Détails du devis : ' + details);
+    lignes.push('', 'Message :', val('message'));
+
+    // Mêmes noms que ceux du formulaire de contact.html (nom, email, sujet, message)
+    var params = {
+      nom: val('nom'),
+      email: val('email'),
+      reply_to: val('email'),
+      sujet: subjectInput.value,
+      message: lignes.join('\n'),
+      telephone: val('telephone'),
+      service: serviceText,
+      type_demande: typeInput.value,
+      details_devis: details
+    };
+
+    sending = true;
+    submitBtn.disabled = true;
+    submitBtn.value = 'Envoi en cours...';
+    msgBox.textContent = '';
+
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+      .then(function () {
+        resetContactForm();
+        showMsg('Votre message a été envoyé avec succès ! Nous vous recontacterons bientôt.', true);
+      }, function (error) {
+        showMsg("Une erreur est survenue lors de l'envoi. Veuillez réessayer.", false);
+        console.log('Erreur EmailJS...', error);
+      })
+      .then(function () {
+        sending = false;
+        submitBtn.disabled = false;
+        submitBtn.value = 'Envoyer';
+      });
+  });
+})();
 </script>
 
   </body>
