@@ -153,7 +153,7 @@
        // Paramètres pour EmailJS (le formulaire complet est passé directement)
        emailjs.sendForm('service_b5vu22o', 'template_b0w8nyc', this)
            .then(() => {
-               formMessage.style.color = "darkgold"; 
+               formMessage.style.color = "#ffc107"; 
                formMessage.textContent = "Votre message a été envoyé avec succès ! Nous vous recontacterons bientôt.";
                document.getElementById('contactForm').reset(); // Réinitialise les champs
            }, (error) => {
